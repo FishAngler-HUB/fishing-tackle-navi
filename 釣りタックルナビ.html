@@ -113,6 +113,18 @@
   .bookmark-btn svg{width:16px;height:16px;}
   .bookmark-btn:hover{border-color:var(--blue-light);}
 
+  /* =============== BUILD NOTICE（作成中のお知らせ） =============== */
+  .build-notice{
+    display:flex; align-items:flex-start; gap:10px;
+    margin:14px auto 0; padding:12px 16px;
+    background:var(--sky-soft); border:1px solid var(--hair); border-left:4px solid var(--accent);
+    border-radius:var(--radius-md);
+  }
+  .build-notice-emoji{font-size:16px; line-height:1.5; flex:none;}
+  .build-notice-body{display:flex; flex-direction:column; gap:3px; min-width:0;}
+  .build-notice-title{font-size:13px; font-weight:700; color:var(--ink);}
+  .build-notice-text{font-size:12px; line-height:1.7; color:var(--mist);}
+
   /* =============== HERO =============== */
   .hero{ position:relative; overflow:hidden; }
   .hero-flex{
@@ -444,6 +456,16 @@
     </div>
   </div>
 </header>
+
+  <div class="wrap">
+    <div class="build-notice">
+      <span class="build-notice-emoji" aria-hidden="true">🚧</span>
+      <div class="build-notice-body">
+        <span class="build-notice-title">現在作成・更新中です</span>
+        <span class="build-notice-text">このサイトは現在作成中のため、一部のタックル情報・おすすめ商品・リンクなどが未掲載の場合があります。<br>より使いやすいタックルナビを目指して、順次情報を追加・更新していきます。</span>
+      </div>
+    </div>
+  </div>
 
   <section class="hero" id="picker-top">
     <div class="wrap">

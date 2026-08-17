@@ -1,0 +1,14 @@
+{
+  "name": "fishing-tackle-navi-tools",
+  "private": true,
+  "version": "1.0.0",
+  "description": "釣りタックルナビ - 楽天商品情報取得ツール（サイト本体はビルド不要の静的HTML）",
+  "type": "commonjs",
+  "scripts": {
+    "fetch:rakuten": "node scripts/fetch-rakuten.js",
+    "dev": "node scripts/dev-server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

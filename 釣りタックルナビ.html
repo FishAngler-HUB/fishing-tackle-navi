@@ -386,13 +386,12 @@
   .spec-card .value{font-size:15px; font-weight:700; color:var(--ink); line-height:1.5;}
   .spec-card .note{font-size:11.8px; color:var(--mist); line-height:1.6;}
 
-  /* product list（メーカー横断でおすすめ商品を比較表示。カード幅に応じて1〜2列に自動調整） */
+  /* product list（メーカー横断でおすすめ商品を比較表示。商品名が長くなるため縦並び固定） */
   .product-list{
-    display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); gap:8px;
+    display:flex; flex-direction:column; gap:8px;
     margin-top:auto; padding-top:10px; border-top:1px dashed var(--hair);
   }
   .product-list-label{
-    grid-column:1 / -1;
     font-family:'Roboto Mono', monospace; font-size:10px; letter-spacing:.08em; text-transform:uppercase;
     color:var(--mist); font-weight:700;
   }
@@ -417,6 +416,8 @@
   .product-maker[data-maker="SHIMANO"]{ background:var(--accent); }
   .product-name{font-size:12.5px; font-weight:700; color:var(--ink); overflow-wrap:anywhere;}
   .product-brand{font-size:11px; color:var(--mist);}
+  .product-price{font-family:'Roboto Mono', monospace; font-size:12px; font-weight:700; color:var(--blue);}
+  .product-stock-note{font-size:11px; color:#999; }
   .product-links{
     margin-top:auto; padding-top:0; display:flex; flex-wrap:wrap; gap:6px;
   }
@@ -630,16 +631,16 @@ const fishingTypes = [
           specification: "8.3ft", power: "ML",
           description: "扱いやすい入門向けの長さ。2.5〜3.5号のエギを中心に秋イカから対応。",
           products: [
-            { id:"egging_beginner_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"エメラルダス X 83ML", model:"83ML", specSummary:"8.3ft・ML・対応エギ1.8〜3.5号", description:"扱いやすい8.3ft・MLクラス。秋イカから一般的なエギングまで幅広く対応できる入門向けロッド。", image:"https://hbb.afl.rakuten.co.jp/hgb/569c27c2.a90de95f.569c27c3.6b55682b/?me_id=1191201&item_id=12767975&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fpoint%2Fcabinet%2F793%2F4550133440793.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:1, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569c1367.468ae0af.569c1368.531b155e/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ffishing-you%2F4550133440793%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MSwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" },
-            { id:"egging_beginner_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"セフィア BB", model:"S83ML", specSummary:"8.3ft・ML", description:"コストパフォーマンスに優れ、扱いやすいエギング入門ロッド。", image:"https://hbb.afl.rakuten.co.jp/hgb/569c1367.468ae0af.569c1368.531b155e/?me_id=1210725&item_id=10162615&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Ffishing-you%2Fcabinet%2Fitem492%2F4969363354020_1.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:2, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569c1367.468ae0af.569c1368.531b155e/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ffishing-you%2F4969363354020%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" }
+            { id:"egging_beginner_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"エメラルダス X 83ML", model:"83ML", specSummary:"8.3ft・ML・対応エギ1.8〜3.5号", description:"扱いやすい8.3ft・MLクラス。秋イカから一般的なエギングまで幅広く対応できる入門向けロッド。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"egging_beginner_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"セフィア BB", model:"S83ML", specSummary:"8.3ft・ML", description:"コストパフォーマンスに優れ、扱いやすいエギング入門ロッド。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         reel: {
           specification: "2500番クラス",
           description: "エギングで扱いやすいサイズ。PE0.6号との組み合わせに適する。",
           products: [
-            { id:"egging_beginner_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"クレスト LT2500S-XH", model:"LT2500S-XH", specSummary:"LT2500S-XH", description:"扱いやすく価格も手頃な入門向けスピニングリール。", image:"https://hbb.afl.rakuten.co.jp/hgb/569c27c2.a90de95f.569c27c3.6b55682b/?me_id=1191201&item_id=12611144&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fpoint%2Fcabinet%2F431%2F4960652309431.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:1, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569c27c2.a90de95f.569c27c3.6b55682b/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fpoint%2F4960652309431%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" },
-            { id:"egging_beginner_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"シエナ", model:"C3000", specSummary:"C3000", description:"手頃な価格ながら滑らかな巻き心地を持つ入門定番リール。", image:"https://hbb.afl.rakuten.co.jp/hgb/569c28a4.76d20d82.569c28a5.6b7dc3fc/?me_id=1271939&item_id=10248668&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Ffishingmax-webshop%2Fcabinet%2Fitmimg%2F01248%2F124897_1.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:2, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569c28a4.76d20d82.569c28a5.6b7dc3fc/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ffishingmax-webshop%2F4969363040923%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" }
+            { id:"egging_beginner_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"エメラルダス X", model:"LT2500-XH-DH", specSummary:"LT2500-XH-DH", description:"扱いやすく価格も手頃な入門向けスピニングリール。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"egging_beginner_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"シエナ", model:"C3000", specSummary:"C3000", description:"手頃な価格ながら滑らかな巻き心地を持つ入門定番リール。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         line: { specification: "PE 0.6号", description: "扱いやすさと強度のバランスを重視した標準的な太さ。", products: [] },
@@ -651,16 +652,16 @@ const fishingTypes = [
           specification: "8ft前後", power: "ML〜MLM",
           description: "軽量性・操作性を重視。シャクリの疲労を抑えつつアタリを感じ取りやすい。",
           products: [
-            { id:"egging_intermediate_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"エメラルダス AIR", model:"", specSummary:"8ft前後・ML〜MLMクラス", description:"入門モデルより軽量性・操作性を重視した中級者向けモデル。エギの操作感やアタリを感じ取りやすい。", image:"https://hbb.afl.rakuten.co.jp/hgb/569d3d17.32c04010.569d3d18.f33c3d6e/?me_id=1418890&item_id=10014274&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fyokootsurigu%2Fcabinet%2Fimage_06%2F4550133339271.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:1, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569c2aea.3c718ba1.569c2aec.7f9fff91/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fcasting%2F4550133445132%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" },
-            { id:"egging_intermediate_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"セフィア XR", model:"S86ML", specSummary:"8.6ft・ML", description:"スパイラルXコアで軽さと操作性を高めた中級者向けモデル。", image:"https://hbb.afl.rakuten.co.jp/hgb/569c1367.468ae0af.569c1368.531b155e/?me_id=1210725&item_id=10143279&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Ffishing-you%2Fcabinet%2Fitem420%2F4969363302762_1.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:2, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569c1367.468ae0af.569c1368.531b155e/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ffishing-you%2F4969363302762%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" }
+            { id:"egging_intermediate_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"エメラルダス MX", model:"86ML・N", specSummary:"8ft前後・ML〜MLMクラス", description:"入門モデルより軽量性・操作性を重視した中級者向けモデル。エギの操作感やアタリを感じ取りやすい。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"egging_intermediate_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"セフィア XR", model:"S86ML", specSummary:"8.6ft・ML", description:"スパイラルXコアで軽さと操作性を高めた中級者向けモデル。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         reel: {
           specification: "2500番クラス",
           description: "エギング向け設計の軽量リール。軽快な操作性を狙える。",
           products: [
-            { id:"egging_intermediate_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"25 エメラルダス AIR LT2500S", model:"LT2500S", specSummary:"LT2500S", description:"エギング向けに設計された軽量なリール。", image:"https://hbb.afl.rakuten.co.jp/hgb/569c2aea.3c718ba1.569c2aec.7f9fff91/?me_id=1311623&item_id=10580685&pc=https%3A%2F%2Fimage.rakuten.co.jp%2Fcasting%2Fcabinet%2Fxm320%2F4550133579561-1.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:1, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569c2aea.3c718ba1.569c2aec.7f9fff91/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fcasting%2F4550133579561%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" },
-            { id:"egging_intermediate_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"ストラディック", model:"C3000", specSummary:"C3000", description:"汎用性の高い定番シリーズ。エギングにも扱いやすいバランス。", image:"https://hbb.afl.rakuten.co.jp/hgb/569d3f05.45ab33b1.569d3f06.0460164c/?me_id=1306383&item_id=10111070&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fangle%2Fcabinet%2Fnew_d230628%2F4969363045867.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:2, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569c2aea.3c718ba1.569c2aec.7f9fff91/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fcasting%2F4969363045843%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" }
+            { id:"egging_intermediate_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"エメラルダス RX", model:"FC LT2500S-H-DH", specSummary:"FC LT2500S-H-DH", description:"エギング向けに設計された軽量なリール。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"egging_intermediate_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"ストラディック", model:"C3000", specSummary:"C3000", description:"汎用性の高い定番シリーズ。エギングにも扱いやすいバランス。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         line: { specification: "PE 0.6号", description: "細さと強度のバランスを重視した標準的なセッティング。", products: [] },
@@ -672,16 +673,16 @@ const fishingTypes = [
           specification: "8.8ft", power: "ML",
           description: "軽量性・感度・操作性を重視したハイエンドクラス。微細な変化を捉えたい経験者向け。",
           products: [
-            { id:"egging_advanced_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"エメラルダス STOIST RT 88ML", model:"88ML", specSummary:"8.8ft・ML・対応エギ1.8〜3.5号", description:"軽量性・感度・操作性を重視したハイエンドクラス。シャクリやフォール中の微細な変化を積極的に捉えたいアングラー向け。", image:"https://hbb.afl.rakuten.co.jp/hgb/569c27c2.a90de95f.569c27c3.6b55682b/?me_id=1191201&item_id=12800238&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fpoint%2Fcabinet%2F162%2F4550133129162.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:1, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569c27c2.a90de95f.569c27c3.6b55682b/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fpoint%2F4550133129162%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" },
-            { id:"egging_advanced_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"セフィア リミテッド", model:"S90ML", specSummary:"9.0ft・ML", description:"シマノのエギングロッドの頂点に立つフラッグシップモデル。感度・操作性を追求。", image:"https://hbb.afl.rakuten.co.jp/hgb/569d40aa.43a588d4.569d40ab.0d37a3ae/?me_id=1333720&item_id=17722298&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fpoint-eastjapan%2Fcabinet%2F923%2F4969363277923.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:2, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569c27c2.a90de95f.569c27c3.6b55682b/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fpoint%2F4969363358653%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" }
+            { id:"egging_advanced_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"エメラルダス AIR", model:"86ML・K", specSummary:"8.6ft・ML・対応エギ1.8〜3.5号", description:"軽量性・感度・操作性を重視したハイエンドクラス。シャクリやフォール中の微細な変化を積極的に捉えたいアングラー向け。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"egging_advanced_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"セフィア リミテッド", model:"S90ML", specSummary:"9.0ft・ML", description:"シマノのエギングロッドの頂点に立つフラッグシップモデル。感度・操作性を追求。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         reel: {
           specification: "2500番クラス(浅溝)",
           description: "軽量性と回転性能を重視したハイエンドクラス。",
           products: [
-            { id:"egging_advanced_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"エアリティ LT2500Sクラス", model:"LT2500S", specSummary:"LT2500Sクラス", description:"軽量性と回転性能を重視したハイエンドクラス。", image:"https://hbb.afl.rakuten.co.jp/hgb/569c2aea.3c718ba1.569c2aec.7f9fff91/?me_id=1311623&item_id=10505436&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fcasting%2Fcabinet%2Fxm241%2F4550133110580.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:1, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569c30cb.e9b5cd4b.569c30cc.2ae5a817/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnaturum%2F3376413%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" },
-            { id:"egging_advanced_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"ツインパワー", model:"C3000", specSummary:"C3000", description:"上位機種譲りの剛性と巻き心地を持つハイエンドリール。", image:"https://hbb.afl.rakuten.co.jp/hgb/569c31a8.ba41bf59.569c31a9.12ed4d4d/?me_id=1404987&item_id=10007645&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fmasubito%2Fcabinet%2Fshohin09%2Fsale4969363046819.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:2, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569c31a8.ba41bf59.569c31a9.12ed4d4d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmasubito%2Fsale4969363046819%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" }
+            { id:"egging_advanced_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"エメラルダス AIR", model:"LT2500S-DH", specSummary:"LT2500S-DH", description:"軽量性と回転性能を重視したハイエンドクラス。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"egging_advanced_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"ツインパワー", model:"C3000", specSummary:"C3000", description:"上位機種譲りの剛性と巻き心地を持つハイエンドリール。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         line: { specification: "PE 0.5〜0.6号", description: "感度と操作性を重視した細めのセッティング。根ズレや対象に応じ調整。", products: [] },
@@ -707,16 +708,16 @@ const fishingTypes = [
           specification: "6.3〜7ft前後", power: "UL〜L",
           description: "初めてのアジングでも扱いやすいライトゲーム向けの入門ロッド。",
           products: [
-            { id:"ajing_beginner_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"月下美人 AJING", model:"", specSummary:"6.3〜7ft前後・UL〜L", description:"初めてのアジングでも扱いやすいライトゲーム向けの入門構成。", image:"https://hbb.afl.rakuten.co.jp/hgb/569c30cb.e9b5cd4b.569c30cc.2ae5a817/?me_id=1196403&item_id=17466495&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fnaturum%2Fcabinet%2Fgoods%2F030448%2F93_1.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:1, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569c30cb.e9b5cd4b.569c30cc.2ae5a817/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnaturum%2F3044893%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" },
-            { id:"ajing_beginner_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"ソアレ BB アジング", model:"S64UL", specSummary:"6.4ft・UL", description:"コストパフォーマンスに優れたアジング入門モデル。", image:"https://hbb.afl.rakuten.co.jp/hgb/569c1367.468ae0af.569c1368.531b155e/?me_id=1210725&item_id=10179166&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Ffishing-you%2Fcabinet%2Fitem551%2F4969363334756_1.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:2, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569c1367.468ae0af.569c1368.531b155e/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ffishing-you%2F4969363334756%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" }
+            { id:"ajing_beginner_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"月下美人 AJING", model:"510UL-S・R", specSummary:"6.3〜7ft前後・UL〜L", description:"初めてのアジングでも扱いやすいライトゲーム向けの入門構成。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"ajing_beginner_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"ソアレ BB アジング", model:"S58UL-S", specSummary:"5.8ft・UL", description:"コストパフォーマンスに優れたアジング入門モデル。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         reel: {
           specification: "2500番クラス",
           description: "軽量なジグヘッド操作がしやすい定番サイズ",
           products: [
-            { id:"ajing_beginner_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"23 レガリス", model:"LT2000S-P", specSummary:"LT2000S-P", description:"軽量で扱いやすく、価格と性能のバランスに優れた初心者向けの定番モデル。", image:"https://hbb.afl.rakuten.co.jp/hgb/569c2aea.3c718ba1.569c2aec.7f9fff91/?me_id=1311623&item_id=10520782&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fcasting%2Fcabinet%2Fxm264%2F4550133162633.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:1, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569c2aea.3c718ba1.569c2aec.7f9fff91/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fcasting%2F4550133162633%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" },
-            { id:"ajing_beginner_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"シエナ", model:"C2000", specSummary:"C2000", description:"手頃な価格で扱いやすい入門定番リール。", image:"https://hbb.afl.rakuten.co.jp/hgb/569d76a9.ebec042e.569d76aa.9de900e8/?me_id=1366413&item_id=10669456&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fnaturum-fishing%2Fcabinet%2Fgoods%2F029806%2F52_1.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:2, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569d76a9.ebec042e.569d76aa.9de900e8/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnaturum-fishing%2F2980652%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" }
+            { id:"ajing_beginner_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"23 レガリス", model:"LT2000S-P", specSummary:"LT2000S-P", description:"軽量で扱いやすく、価格と性能のバランスに優れた初心者向けの定番モデル。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"ajing_beginner_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"セドナ", model:"C2000S", specSummary:"C2000S", description:"手頃な価格で扱いやすい入門定番リール。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         line: { specification: "PE 0.3〜0.4号", description: "感度と扱いやすさのバランスが良い太さ", products: [] },
@@ -728,16 +729,16 @@ const fishingTypes = [
           specification: "6ft台", power: "UL〜L",
           description: "軽量性と感度を重視し、ジグヘッドの操作感や小さなアタリを感じ取りやすい構成。",
           products: [
-            { id:"ajing_intermediate_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"月下美人 AIR", model:"", specSummary:"6ft台・UL〜L", description:"軽量性・感度を重視した中級者向けモデル。", image:"https://hbb.afl.rakuten.co.jp/hgb/569c2aea.3c718ba1.569c2aec.7f9fff91/?me_id=1311623&item_id=10548448&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fcasting%2Fcabinet%2Fxm278%2F4550133338311.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:1, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569c2aea.3c718ba1.569c2aec.7f9fff91/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fcasting%2F4550133338311%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" },
-            { id:"ajing_intermediate_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"ソアレ SS アジング", model:"S64L", specSummary:"6.4ft・L", description:"CI4+素材で軽量化された感度重視の中級者向けモデル。", image:"https://hbb.afl.rakuten.co.jp/hgb/569c27c2.a90de95f.569c27c3.6b55682b/?me_id=1191201&item_id=12624165&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fpoint%2Fcabinet%2F358%2F4969363354358.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:2, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569c27c2.a90de95f.569c27c3.6b55682b/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fpoint%2F4969363354358%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" }
+            { id:"ajing_intermediate_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"月下美人 MX AJING", model:"64UL-S・J", specSummary:"6ft台・UL〜L", description:"軽量性・感度を重視した中級者向けモデル。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"ajing_intermediate_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"ソアレ SS アジング", model:"S64L-S", specSummary:"6.4ft・L", description:"CI4+素材で軽量化された感度重視の中級者向けモデル。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         reel: {
           specification: "LT2000Sクラス",
           description: "軽量なアジング専用設計で操作性が高い",
           products: [
-            { id:"ajing_intermediate_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"月下美人 LT2000S", model:"LT2000S", specSummary:"LT2000S", description:"PEラインとの相性が良い定番サイズ。", image:"https://hbb.afl.rakuten.co.jp/hgb/569d40aa.43a588d4.569d40ab.0d37a3ae/?me_id=1333720&item_id=17456762&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fpoint-eastjapan%2Fcabinet%2F297%2F4550133393297.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:1, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569d40aa.43a588d4.569d40ab.0d37a3ae/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fpoint-eastjapan%2F4550133393297%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" },
-            { id:"ajing_intermediate_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"ヴァンフォード", model:"C2000S", specSummary:"C2000S", description:"軽量・高感度なライトゲーム専用設計の中級モデル。", image:"https://hbb.afl.rakuten.co.jp/hgb/569d7d5b.f460a5ec.569d7d5c.e12998cd/?me_id=1261517&item_id=10078199&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fmarunishi%2Fcabinet%2Fneko26%2F4969363047014.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:2, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569d7d5b.f460a5ec.569d7d5c.e12998cd/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmarunishi%2F4969363047014%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" }
+            { id:"ajing_intermediate_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"月下美人 LT2000S", model:"LT2000S-H", specSummary:"LT2000S-H", description:"PEラインとの相性が良い定番サイズ。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"ajing_intermediate_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"ヴァンフォード", model:"C2000S", specSummary:"C2000S", description:"軽量・高感度なライトゲーム専用設計の中級モデル。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         line: { specification: "PE 0.3〜0.4号", description: "感度と強度をバランスよく両立", products: [] },
@@ -749,16 +750,16 @@ const fishingTypes = [
           specification: "6ft前後", power: "ULクラス",
           description: "軽量性・感度・操作性を優先した本格派向けのフィネス構成。",
           products: [
-            { id:"ajing_advanced_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"月下美人 EX", model:"", specSummary:"6ft前後・ULクラス", description:"軽量性・感度・操作性を優先した本格派向けのフィネス構成。", image:"https://hbb.afl.rakuten.co.jp/hgb/569c30cb.e9b5cd4b.569c30cc.2ae5a817/?me_id=1196403&item_id=18725421&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fnaturum%2Fcabinet%2Fgoods%2F034878%2F88_1.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:1, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569c30cb.e9b5cd4b.569c30cc.2ae5a817/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnaturum%2F3487888%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" },
-            { id:"ajing_advanced_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"ソアレ リミテッド アジング", model:"S64UL", specSummary:"6.4ft・UL", description:"軽さ・感度・操作性を追求したライトゲームの最高峰モデル。", image:"https://hbb.afl.rakuten.co.jp/hgb/569d76a9.ebec042e.569d76aa.9de900e8/?me_id=1366413&item_id=10918143&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fnaturum-fishing%2Fcabinet%2Fgoods%2F034857%2F91_1.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:2, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569d76a9.ebec042e.569d76aa.9de900e8/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnaturum-fishing%2F3485791%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" }
+            { id:"ajing_advanced_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"月下美人 AIR AJING", model:"63L-T・W", specSummary:"6.3ft・L", description:"軽量性・感度・操作性を優先した本格派向けのフィネス構成。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"ajing_advanced_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"ソアレ リミテッド", model:"S64UL-S", specSummary:"6.4ft・UL", description:"軽さ・感度・操作性を追求したライトゲームの最高峰モデル。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         reel: {
           specification: "LT2000S系",
           description: "軽量性と回転性能を重視したハイエンドクラス",
           products: [
-            { id:"ajing_advanced_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"エアリティ LT2000S系", model:"LT2000S系", specSummary:"LT2000S系", description:"軽量性と回転性能を重視したハイエンドクラス。", image:"https://hbb.afl.rakuten.co.jp/hgb/569c2aea.3c718ba1.569c2aec.7f9fff91/?me_id=1311623&item_id=10505435&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fcasting%2Fcabinet%2Fxm241%2F4550133110573.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:1, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569c2aea.3c718ba1.569c2aec.7f9fff91/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fcasting%2F4550133110573%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" },
-            { id:"ajing_advanced_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"ツインパワー", model:"C2000S", specSummary:"C2000S", description:"軽さと剛性を両立したハイエンドリール。", image:"https://hbb.afl.rakuten.co.jp/hgb/569c30cb.e9b5cd4b.569c30cc.2ae5a817/?me_id=1196403&item_id=18690805&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fnaturum%2Fcabinet%2Fgoods%2F034561%2F12_1.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:2, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569c30cb.e9b5cd4b.569c30cc.2ae5a817/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnaturum%2F3456112%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" }
+            { id:"ajing_advanced_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"エアリティ LT2000S-H", model:"LT2000S-H", specSummary:"LT2000S-H", description:"軽量性と回転性能を重視したハイエンドクラス。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"ajing_advanced_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"ツインパワー", model:"C2000S", specSummary:"C2000S", description:"軽さと剛性を両立したハイエンドリール。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         line: { specification: "PE 0.2〜0.3号", description: "極細ラインで飛距離と感度を追求", products: [] },
@@ -784,16 +785,16 @@ const fishingTypes = [
           specification: "7ft前後", power: "UL〜L",
           description: "メバリングを始めるための扱いやすいライトゲーム構成。",
           products: [
-            { id:"mebaring_beginner_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"月下美人 メバル", model:"", specSummary:"7ft前後・UL〜L", description:"メバリングを始めるための扱いやすいライトゲーム構成。", image:"https://hbb.afl.rakuten.co.jp/hgb/569c30cb.e9b5cd4b.569c30cc.2ae5a817/?me_id=1196403&item_id=17525209&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fnaturum%2Fcabinet%2Fgoods%2F030569%2F65_1.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:1, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569c30cb.e9b5cd4b.569c30cc.2ae5a817/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnaturum%2F3056965%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" },
-            { id:"mebaring_beginner_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"ソアレ BB", model:"S76UL", specSummary:"7.6ft・UL", description:"コストパフォーマンスに優れたメバリング入門モデル。", image:"https://hbb.afl.rakuten.co.jp/hgb/569c27c2.a90de95f.569c27c3.6b55682b/?me_id=1191201&item_id=12681238&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fpoint%2Fcabinet%2F827%2F4969363333827.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:2, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569c27c2.a90de95f.569c27c3.6b55682b/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fpoint%2F4969363333827%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" }
+            { id:"mebaring_beginner_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"月下美人(メバルモデル)", model:"610L-S・N", specSummary:"7ft前後・UL〜L", description:"メバリングを始めるための扱いやすいライトゲーム構成。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"mebaring_beginner_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"ソアレ BB", model:"S76UL-S", specSummary:"7.6ft・UL", description:"コストパフォーマンスに優れたメバリング入門モデル。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         reel: {
           specification: "2000番クラス",
           description: "軽量ジグヘッドの操作性を重視したサイズ",
           products: [
-            { id:"mebaring_beginner_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"23 レガリス", model:"LT2000S-XH", specSummary:"LT2000S-XH", description:"軽量で扱いやすく、価格と性能のバランスに優れた初心者向けの定番モデル。", image:"https://hbb.afl.rakuten.co.jp/hgb/569c2aea.3c718ba1.569c2aec.7f9fff91/?me_id=1311623&item_id=10520783&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fcasting%2Fcabinet%2Fxm264%2F4550133162640.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:1, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569c2aea.3c718ba1.569c2aec.7f9fff91/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fcasting%2F4550133162640%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" },
-            { id:"mebaring_beginner_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"シエナ", model:"C2000", specSummary:"C2000", description:"手頃な価格で扱いやすい入門定番リール。", image:"https://hbb.afl.rakuten.co.jp/hgb/569d76a9.ebec042e.569d76aa.9de900e8/?me_id=1366413&item_id=10669456&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fnaturum-fishing%2Fcabinet%2Fgoods%2F029806%2F52_1.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:2, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569d76a9.ebec042e.569d76aa.9de900e8/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnaturum-fishing%2F2980652%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" }
+            { id:"mebaring_beginner_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"23 レガリス", model:"LT2000S-XH", specSummary:"LT2000S-XH", description:"軽量で扱いやすく、価格と性能のバランスに優れた初心者向けの定番モデル。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"mebaring_beginner_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"セドナ", model:"C2000S", specSummary:"C2000S", description:"手頃な価格で扱いやすい入門定番リール。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         line: { specification: "PE 0.3〜0.4号", description: "扱いやすく遠投もしやすい標準的な太さ", products: [] },
@@ -805,16 +806,16 @@ const fishingTypes = [
           specification: "6.5〜7.5ft", power: "L前後",
           description: "軽量性と操作性を高め、ジグヘッドだけでなくプラグも扱いやすい構成。",
           products: [
-            { id:"mebaring_intermediate_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"月下美人 MX", model:"", specSummary:"6.5〜7.5ft・L前後", description:"軽量性・操作性を重視し、ジグヘッド・プラグ両方に対応しやすいモデル。", image:"https://hbb.afl.rakuten.co.jp/hgb/569c2aea.3c718ba1.569c2aec.7f9fff91/?me_id=1311623&item_id=10585765&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fcasting%2Fcabinet%2Fxm326%2F4550133338410.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:1, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569c2aea.3c718ba1.569c2aec.7f9fff91/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fcasting%2F4550133338410%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" },
-            { id:"mebaring_intermediate_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"ソアレ XR", model:"S68UL", specSummary:"6.8ft・UL", description:"CI4+素材で操作性を高めた中級者向けモデル。", image:"https://hbb.afl.rakuten.co.jp/hgb/569c27c2.a90de95f.569c27c3.6b55682b/?me_id=1191201&item_id=12679207&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fpoint%2Fcabinet%2F813%2F4969363303813.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:2, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569c27c2.a90de95f.569c27c3.6b55682b/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fpoint%2F4969363303813%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" }
+            { id:"mebaring_intermediate_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"月下美人 MX", model:"74UL-S・N", specSummary:"6.5〜7.5ft・L前後", description:"軽量性・操作性を重視し、ジグヘッド・プラグ両方に対応しやすいモデル。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"mebaring_intermediate_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"ソアレ XR", model:"S68UL-S", specSummary:"6.8ft・UL", description:"CI4+素材で操作性を高めた中級者向けモデル。", image:"https://hbb.afl.rakuten.co.jp/hgb/569c27c2.a90de95f.569c27c3.6b55682b/?me_id=1191201&item_id=12679207&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fpoint%2Fcabinet%2F813%2F4969363303813.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:2, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569c27c2.a90de95f.569c27c3.6b55682b/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fpoint%2F4969363303813%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" }
           ]
         },
         reel: {
           specification: "LT2000Sクラス",
           description: "PEラインとの組み合わせが定番の軽量リール",
           products: [
-            { id:"mebaring_intermediate_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"月下美人 LT2000S", model:"LT2000S", specSummary:"LT2000S", description:"PEラインとの組み合わせが定番の軽量リール。", image:"https://hbb.afl.rakuten.co.jp/hgb/569d40aa.43a588d4.569d40ab.0d37a3ae/?me_id=1333720&item_id=17456762&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fpoint-eastjapan%2Fcabinet%2F297%2F4550133393297.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:1, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569d40aa.43a588d4.569d40ab.0d37a3ae/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fpoint-eastjapan%2F4550133393297%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" },
-            { id:"mebaring_intermediate_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"ヴァンフォード", model:"C2000S", specSummary:"C2000S", description:"軽量・高感度なライトゲーム専用設計の中級モデル。", image:"https://hbb.afl.rakuten.co.jp/hgb/569c30cb.e9b5cd4b.569c30cc.2ae5a817/?me_id=1196403&item_id=18723224&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fnaturum%2Fcabinet%2Fgoods%2F034857%2F14_1.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:2, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569c30cb.e9b5cd4b.569c30cc.2ae5a817/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnaturum%2F3485714%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" }
+            { id:"mebaring_intermediate_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"月下美人 LT2000S", model:"LT2000S-H", specSummary:"LT2000S-H", description:"PEラインとの組み合わせが定番の軽量リール。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"mebaring_intermediate_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"ヴァンフォード", model:"C2000S", specSummary:"C2000S", description:"軽量・高感度なライトゲーム専用設計の中級モデル。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         line: { specification: "PE 0.3〜0.4号", description: "軽量ルアーの遠投がしやすい太さ", products: [] },
@@ -826,15 +827,15 @@ const fishingTypes = [
           specification: "6〜7ft前後", power: "Lクラス",
           description: "大型メバルを含め、繊細なアプローチと高い感度を重視した本格構成。",
           products: [
-            { id:"mebaring_advanced_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"月下美人 EX", model:"", specSummary:"6〜7ft前後・Lクラス", description:"大型メバルを含め、繊細なアプローチと高い感度を重視した本格構成。", image:"https://hbb.afl.rakuten.co.jp/hgb/569c30cb.e9b5cd4b.569c30cc.2ae5a817/?me_id=1196403&item_id=18575325&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fnaturum%2Fcabinet%2Fgoods%2F033358%2F47_1.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:1, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569c30cb.e9b5cd4b.569c30cc.2ae5a817/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnaturum%2F3335847%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" },
-            { id:"mebaring_advanced_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"ソアレ リミテッド", model:"S76UL", specSummary:"7.6ft・UL", description:"軽さ・感度・操作性を追求したライトゲームの最高峰モデル。", image:"https://hbb.afl.rakuten.co.jp/hgb/569c30cb.e9b5cd4b.569c30cc.2ae5a817/?me_id=1196403&item_id=18723240&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fnaturum%2Fcabinet%2Fgoods%2F034857%2F92_1.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:2, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569c30cb.e9b5cd4b.569c30cc.2ae5a817/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnaturum%2F3485792%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" }
+            { id:"mebaring_advanced_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"月下美人 AIR", model:"74UL-S・W", specSummary:"7.4ft前後・UL", description:"大型メバルを含め、繊細なアプローチと高い感度を重視した本格構成。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"mebaring_advanced_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"ソアレ リミテッド", model:"S76UL-S", specSummary:"7.6ft・UL", description:"軽さ・感度・操作性を追求したライトゲームの最高峰モデル。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         reel: {
           specification: "LT2000S系",
           description: "軽量性と回転性能を重視したハイエンドクラス",
           products: [
-            { id:"mebaring_advanced_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"エアリティ LT2000S系", model:"LT2000S系", specSummary:"LT2000S系", description:"軽量性と回転性能を重視したハイエンドクラス。", image:"https://hbb.afl.rakuten.co.jp/hgb/569c2aea.3c718ba1.569c2aec.7f9fff91/?me_id=1311623&item_id=10505435&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fcasting%2Fcabinet%2Fxm241%2F4550133110573.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:1, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569c2aea.3c718ba1.569c2aec.7f9fff91/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fcasting%2F4550133110573%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" },
+            { id:"mebaring_advanced_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"エアリティ LT2000S-H", model:"LT2000S-H", specSummary:"LT2000S-H", description:"軽量性と回転性能を重視したハイエンドクラス。", image:"https://hbb.afl.rakuten.co.jp/hgb/569c2aea.3c718ba1.569c2aec.7f9fff91/?me_id=1311623&item_id=10505435&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fcasting%2Fcabinet%2Fxm241%2F4550133110573.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:1, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569c2aea.3c718ba1.569c2aec.7f9fff91/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fcasting%2F4550133110573%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" },
             { id:"mebaring_advanced_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"ツインパワー", model:"C2000S", specSummary:"C2000S", description:"軽さと剛性を両立したハイエンドリール。", image:"https://hbb.afl.rakuten.co.jp/hgb/569d7d5b.f460a5ec.569d7d5c.e12998cd/?me_id=1261517&item_id=10083057&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fmarunishi%2Fcabinet%2Fneko32%2F4969363049216.jpg%3F_ex%3D240x240&s=240x240&t=pict", recommendationRank:2, isActive:true, rakutenUrl:"https://hb.afl.rakuten.co.jp/ichiba/569d7d5b.f460a5ec.569d7d5c.e12998cd/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmarunishi%2F4969363049216%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9", amazonUrl:"" }
           ]
         },
@@ -862,7 +863,7 @@ const fishingTypes = [
           description: "港湾部を中心に、シーバスを始めやすい扱いやすいスタンダード構成。",
           products: [
             { id:"seabass_beginner_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"ルアーニスト 86ML", model:"86ML", specSummary:"8.6ft・ML", description:"港湾部を中心に、シーバスを始めやすい扱いやすいスタンダード構成。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
-            { id:"seabass_beginner_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"エクスセンス BB", model:"S86ML", specSummary:"8.6ft・ML", description:"CI4+ボディを採用したシーバス入門定番モデル。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
+            { id:"seabass_beginner_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"エンカウンター", model:"S86ML", specSummary:"8.6ft・ML", description:"CI4+ボディを採用したシーバス入門定番モデル。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         reel: {
@@ -883,7 +884,7 @@ const fishingTypes = [
           description: "軽量性・操作性・キャスト性能を高めた、港湾部で使いやすい中級者向け構成。",
           products: [
             { id:"seabass_intermediate_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"ラテオ 86ML・K", model:"86ML・K", specSummary:"8.6ft・ML", description:"軽量性・操作性・キャスト性能を高めた中級者向け構成。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
-            { id:"seabass_intermediate_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"エクスセンス ジェノス", model:"S86ML", specSummary:"8.6ft・ML", description:"スパイラルXコアで軽さと強さを両立した中級者向けモデル。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
+            { id:"seabass_intermediate_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"エクスセンス ジェノス", model:"S90L+/F", specSummary:"9.0ft・L+", description:"スパイラルXコアで軽さと強さを両立した中級者向けモデル。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         reel: {
@@ -891,7 +892,7 @@ const fishingTypes = [
           description: "大型が掛かってもやり取りしやすいハイギア設計",
           products: [
             { id:"seabass_intermediate_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"セルテート LT3000-XH", model:"LT3000-XH", specSummary:"LT3000-XH", description:"大型が掛かってもやり取りしやすいハイギア設計。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
-            { id:"seabass_intermediate_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"ストラディック", model:"C3000MHG", specSummary:"C3000MHG", description:"大型が掛かってもやり取りしやすいハイギア設計。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
+            { id:"seabass_intermediate_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"23ストラディック", model:"3000MHG", specSummary:"3000MHG", description:"大型が掛かってもやり取りしやすいハイギア設計。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         line: { specification: "PE 0.8〜1.2号", description: "オールラウンドに使える太さ", products: [] },
@@ -903,7 +904,7 @@ const fishingTypes = [
           specification: "8.6ft", power: "ML",
           description: "キャスト精度、ルアー操作性、感度を重視した本格的なシーバスタックル。",
           products: [
-            { id:"seabass_advanced_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"モアザン 86ML", model:"86ML", specSummary:"8.6ft・ML", description:"キャスト精度、ルアー操作性、感度を重視した本格的なシーバスタックル。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"seabass_advanced_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"モアザン 86ML", model:"86ML・J", specSummary:"8.6ft・ML", description:"キャスト精度、ルアー操作性、感度を重視した本格的なシーバスタックル。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
             { id:"seabass_advanced_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"エクスセンス ∞(インフィニティ)", model:"S86ML", specSummary:"8.6ft・ML", description:"シマノのシーバスロッドの最高峰。感度・操作性を追求したフラッグシップ。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
@@ -911,7 +912,7 @@ const fishingTypes = [
           specification: "LT3000-XHクラス",
           description: "遠投性能とドラグ性能を重視",
           products: [
-            { id:"seabass_advanced_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"セルテート LT3000-XH", model:"LT3000-XH", specSummary:"LT3000-XH", description:"遠投性能とドラグ性能を重視。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"seabass_advanced_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"22イグジスト", model:"LT2500S", specSummary:"LT2500S", description:"遠投性能とドラグ性能を重視。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
             { id:"seabass_advanced_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"ツインパワー", model:"C3000MHG", specSummary:"C3000MHG", description:"遠投性能とドラグ性能を重視したハイエンドリール。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
@@ -947,7 +948,7 @@ const fishingTypes = [
           description: "遠投とドラグ性能のバランス重視",
           products: [
             { id:"lsj_beginner_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"23 レガリス", model:"LT4000-CXH", specSummary:"LT4000-CXH", description:"軽量で扱いやすく、価格と性能のバランスに優れた初心者向けの定番モデル。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
-            { id:"lsj_beginner_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"サハラ", model:"C5000", specSummary:"C5000", description:"扱いやすさと耐久性を備えた定番の入門リール。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
+            { id:"lsj_beginner_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"22 サハラ", model:"C5000XG", specSummary:"C5000XG", description:"扱いやすさと耐久性を備えた定番の入門リール。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         line: { specification: "PE 1〜1.5号", description: "青物とのやり取りに耐える強度", products: [] },
@@ -980,7 +981,7 @@ const fishingTypes = [
           specification: "9.6ft前後", power: "ML〜M",
           description: "遠投性能・操作性・感度を高いレベルで求めるアングラー向け。",
           products: [
-            { id:"lsj_advanced_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"ドラッガー SX", model:"", specSummary:"9.6ft前後・ML〜M", description:"遠投性能・操作性・感度を高いレベルで求めるアングラー向け。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"lsj_advanced_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"ドラッガー SX", model:"100ML", specSummary:"9.6ft前後・ML〜M", description:"遠投性能・操作性・感度を高いレベルで求めるアングラー向け。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
             { id:"lsj_advanced_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"コルトスナイパー XR", model:"S100MH", specSummary:"10.0ft・MH", description:"遠投性能とパワーを高めた上級者向けの重量級モデル。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
@@ -989,7 +990,7 @@ const fishingTypes = [
           description: "高負荷でも安定するドラグ性能",
           products: [
             { id:"lsj_advanced_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"セルテート LT4000-CXH", model:"LT4000-CXH", specSummary:"LT4000-CXH", description:"高負荷でも安定するドラグ性能。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
-            { id:"lsj_advanced_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"ツインパワー SW", model:"5000HG", specSummary:"5000HG", description:"高負荷でも安定するSW仕様のハイエンドリール。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
+            { id:"lsj_advanced_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"ツインパワー", model:"C5000XG", specSummary:"C5000XG", description:"高負荷でも安定するSW仕様のハイエンドリール。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         line: { specification: "PE 1〜1.5号", description: "強い引きにも耐えるライン強度", products: [] },
@@ -1015,7 +1016,7 @@ const fishingTypes = [
           specification: "9.6ft", power: "M",
           description: "ショアジギングを始めるためのエントリーモデル。投げやすさと扱いやすさを重視。",
           products: [
-            { id:"sj_beginner_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"ショアジギング X 96M", model:"96M", specSummary:"9.6ft・M", description:"ショアジギングを始めるためのエントリーモデル。投げやすさと扱いやすさを重視。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"sj_beginner_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"ショアジギング X 96MH", model:"96MH", specSummary:"9.6ft・MH", description:"ショアジギングを始めるためのエントリーモデル。投げやすさと扱いやすさを重視。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
             { id:"sj_beginner_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"コルトスナイパー BB", model:"S100MH", specSummary:"10.0ft・MH", description:"投げやすさと扱いやすさを重視したショアジギング入門モデル。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
@@ -1024,7 +1025,7 @@ const fishingTypes = [
           description: "大型青物とのやり取りに必要な基本サイズ",
           products: [
             { id:"sj_beginner_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"24 レブロス", model:"LT5000-CXH", specSummary:"LT5000-CXH", description:"扱いやすさと価格のバランスに優れ、初めてのショアジギングにも選びやすい定番モデル。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
-            { id:"sj_beginner_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"サハラ", model:"C5000", specSummary:"C5000", description:"扱いやすさと耐久性を備えた定番の入門リール。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
+            { id:"sj_beginner_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"22 サハラ", model:"C5000XG", specSummary:"C5000XG", description:"扱いやすさと耐久性を備えた定番の入門リール。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         line: { specification: "PE 1.5〜2号", description: "強度を重視した太めの設定", products: [] },
@@ -1057,7 +1058,7 @@ const fishingTypes = [
           specification: "9.6〜10.0ft", power: "M〜MH",
           description: "大型青物とのファイトや強い潮流にも対応する本格派向け構成。",
           products: [
-            { id:"sj_advanced_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"ドラッガー SX", model:"", specSummary:"9.6〜10.0ft・M〜MH", description:"大型青物とのファイトや強い潮流にも対応する本格派向け構成。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"sj_advanced_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"ドラッガー SX", model:"100MH", specSummary:"9.6〜10.0ft・M〜MH", description:"大型青物とのファイトや強い潮流にも対応する本格派向け構成。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
             { id:"sj_advanced_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"コルトスナイパー XR", model:"S100XH", specSummary:"10.0ft・XH", description:"大型青物とのファイトに対応するハイパワーな上級者向けモデル。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
@@ -1066,7 +1067,7 @@ const fishingTypes = [
           description: "大型青物の強烈な引きに耐える剛性",
           products: [
             { id:"sj_advanced_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"セルテート SW 5000〜6000番クラス", model:"", specSummary:"SW 5000〜6000番クラス", description:"大型青物の強烈な引きに耐える剛性。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
-            { id:"sj_advanced_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"ツインパワー SW", model:"5000〜8000HG", specSummary:"5000〜8000HG", description:"大型青物の強烈な引きに耐えるSW仕様の剛性。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
+            { id:"sj_advanced_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"21ツインパワー SW", model:"8000HG", specSummary:"8000HG", description:"大型青物の強烈な引きに耐えるSW仕様の剛性。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         line: { specification: "PE 2〜3号", description: "根ズレや強い負荷にも耐える太さ", products: [] },
@@ -1092,8 +1093,8 @@ const fishingTypes = [
           specification: "7.3ft前後", power: "L〜ML",
           description: "チニングを始めやすいライトなスピニング構成。",
           products: [
-            { id:"chinning_beginner_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"シルバーウルフ 73LML-S", model:"73LML-S", specSummary:"7.3ft前後・L〜ML", description:"チニングを始めやすいライトなスピニング構成。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
-            { id:"chinning_beginner_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"ブレニアス BB", model:"S610L", specSummary:"6.1ft・L", description:"都市型チニングに幅広く対応する扱いやすい入門モデル。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
+            { id:"chinning_beginner_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"23シルバーウルフ", model:"73LML-S・W", specSummary:"7.3ft前後・L〜ML", description:"チニングを始めやすいライトなスピニング構成。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"chinning_beginner_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"ブレニアス BB", model:"S80LS", specSummary:"8.0ft・LS", description:"都市型チニングに幅広く対応する扱いやすい入門モデル。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         reel: {
@@ -1113,15 +1114,15 @@ const fishingTypes = [
           specification: "8.2ft前後", power: "ML",
           description: "遠投性能と操作性を高めたチニング専用構成。",
           products: [
-            { id:"chinning_intermediate_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"シルバーウルフ MX 82ML", model:"82ML", specSummary:"8.2ft前後・ML", description:"遠投性能と操作性を高めたチニング専用構成。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
-            { id:"chinning_intermediate_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"ブレニアス BB", model:"S79ML", specSummary:"7.9ft・ML", description:"遠投性能を高めたモデルを選べる中級者向け構成。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
+            { id:"chinning_intermediate_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"シルバーウルフ MX 82ML・Q", model:"82ML・Q", specSummary:"8.2ft前後・ML", description:"遠投性能と操作性を高めたチニング専用構成。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"chinning_intermediate_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"ブレニアス XR", model:"S76ML-S", specSummary:"7.6ft・ML", description:"遠投性能を高めたモデルを選べる中級者向け構成。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         reel: {
           specification: "LT3000-XHクラス",
           description: "PEラインとの相性が良いハイギア設計",
           products: [
-            { id:"chinning_intermediate_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"25セルテート LT3000-XH", model:"LT3000-XH", specSummary:"LT3000-XH", description:"PEラインとの相性が良いハイギア設計。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"chinning_intermediate_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"24セルテート LT3000-XH", model:"LT3000-XH", specSummary:"LT3000-XH", description:"PEラインとの相性が良いハイギア設計。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
             { id:"chinning_intermediate_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"ストラディック", model:"C3000", specSummary:"C3000", description:"PEラインとの相性が良い定番シリーズ。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
@@ -1134,15 +1135,15 @@ const fishingTypes = [
           specification: "7.0〜7.6ft", power: "ML",
           description: "PEベイトフィネスを含め、チニングを突き詰めたいアングラー向けの本格構成。",
           products: [
-            { id:"chinning_advanced_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"シルバーウルフ EX", model:"", specSummary:"7.0〜7.6ft・ML", description:"PEベイトフィネスを含め、チニングを突き詰めたいアングラー向けの本格構成。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
-            { id:"chinning_advanced_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"ブレニアス エクスチューン", model:"S79ML", specSummary:"7.9ft・ML", description:"スパイラルXコア採用のチニングロッド最高峰モデル。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
+            { id:"chinning_advanced_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"シルバーウルフ EX", model:"72ML-S", specSummary:"7.0〜7.6ft・ML", description:"PEベイトフィネスを含め、チニングを突き詰めたいアングラー向けの本格構成。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"chinning_advanced_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"ブレニアス エクスチューン", model:"S76M", specSummary:"7.6ft・M", description:"スパイラルXコア採用のチニングロッド最高峰モデル。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         reel: {
           specification: "PE専用ベイトフィネス",
           description: "細PEラインに完全対応したチニング専用ベイトリール",
           products: [
-            { id:"chinning_advanced_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"シルバーウルフ SV TW PE SPECIAL", model:"SV TW PE SPECIAL", specSummary:"PE専用設計", description:"細PEラインに完全対応したチニング専用ベイトリール。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"chinning_advanced_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"シルバーウルフ SV TW", model:"1000XH PE SPECIAL", specSummary:"1000XH PE SPECIAL", description:"細PEラインに完全対応したチニング専用ベイトリール。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
             { id:"chinning_advanced_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"アルデバラン BFS", model:"XG", specSummary:"BFS XG", description:"PEベイトフィネスに対応した軽量・高感度なベイトリール。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
@@ -1169,8 +1170,8 @@ const fishingTypes = [
           specification: "7.9ft前後", power: "M",
           description: "漁港を中心にロックフィッシュを始めるための扱いやすい構成。",
           products: [
-            { id:"rockfish_beginner_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"HRF 79M", model:"79M", specSummary:"7.9ft前後・M", description:"漁港を中心にロックフィッシュを始めるための扱いやすい構成。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
-            { id:"rockfish_beginner_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"ハードロッカー BB", model:"S79M", specSummary:"7.9ft・M", description:"手軽にロックフィッシュを楽しめるエントリーモデル。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
+            { id:"rockfish_beginner_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"HRF 79M", model:"79M・Q", specSummary:"7.9ft前後・M", description:"漁港を中心にロックフィッシュを始めるための扱いやすい構成。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"rockfish_beginner_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"ハードロッカー BB", model:"S76ML", specSummary:"7.6ft・ML", description:"手軽にロックフィッシュを楽しめるエントリーモデル。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         reel: {
@@ -1190,16 +1191,16 @@ const fishingTypes = [
           specification: "8.6ft前後", power: "MHB",
           description: "根の荒い場所で魚を強引に寄せるパワーと感度を重視した構成。",
           products: [
-            { id:"rockfish_intermediate_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"HRF 86MHB", model:"86MHB", specSummary:"8.6ft前後・MHB", description:"根の荒い場所で魚を強引に寄せるパワーと感度を重視した構成。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
-            { id:"rockfish_intermediate_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"ハードロッカー SS", model:"S86MH", specSummary:"8.6ft・MH", description:"根の荒い場所でのパワーと操作性を両立した中級者向けモデル。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
+            { id:"rockfish_intermediate_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"HRF 83MH・Q", model:"83MH・Q", specSummary:"8.3ft・MH", description:"根の荒い場所で魚を強引に寄せるパワーと感度を重視した構成。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"rockfish_intermediate_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"ハードロッカー SS", model:"S83ML+", specSummary:"8.3ft・ML+", description:"根の荒い場所でのパワーと操作性を両立した中級者向けモデル。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         reel: {
           specification: "ベイトリール",
           description: "太めのラインでもトラブルの少ないベイトタックル",
           products: [
-            { id:"rockfish_intermediate_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"タトゥーラ SV TW", model:"SV TW", specSummary:"SV TW", description:"太めのラインでもトラブルの少ないベイトタックル。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
-            { id:"rockfish_intermediate_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"SLX", model:"DC", specSummary:"SLX DC", description:"太めのラインでも扱いやすい定番のベイトリール。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
+            { id:"rockfish_intermediate_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"25カルディア", model:"LT4000-CXH", specSummary:"LT4000-CXH", description:"太めのラインでもトラブルの少ないベイトタックル。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"rockfish_intermediate_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"23ストラディック", model:"4000MHG", specSummary:"4000MHG", description:"太めのラインでも扱いやすい定番のベイトリール。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         line: { specification: "PE 1.2〜1.5号", description: "根ズレ・強度のバランス型", products: [] },
@@ -1211,16 +1212,16 @@ const fishingTypes = [
           specification: "8.6ft前後", power: "MHB",
           description: "軽量性・感度を高めたロックフィッシュのハイエンドクラス。大型キジハタなどを根から引き離すパワーを持つ。",
           products: [
-            { id:"rockfish_advanced_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"HRF AIR 86MHB", model:"86MHB", specSummary:"8.6ft前後・MHB", description:"高密度HVFカーボンとX45構造で軽量性・感度・キャスト性能を高めたハイエンドクラス。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
-            { id:"rockfish_advanced_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"ハードロッカー エクスチューン", model:"S86MH", specSummary:"8.6ft・MH", description:"スパイラルXコアとナノアロイで高強度化したハイエンドモデル。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
+            { id:"rockfish_advanced_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"HRF SX", model:"86MHS", specSummary:"8.6ft前後・MHS", description:"高密度HVFカーボンとX45構造で軽量性・感度・キャスト性能を高めたハイエンドクラス。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"rockfish_advanced_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"ハードロッカー エクスチューン", model:"S86MH+", specSummary:"8.6ft・MH+", description:"スパイラルXコアとナノアロイで高強度化したハイエンドモデル。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         reel: {
           specification: "ベイトリール(ヘビーデューティー)",
           description: "強い巻き取りと耐久性を重視した高剛性設計",
           products: [
-            { id:"rockfish_advanced_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"ジリオン TW HD", model:"TW HD", specSummary:"TW HD", description:"強い巻き取りと耐久性を重視した高剛性設計。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
-            { id:"rockfish_advanced_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"スコーピオン MD", model:"", specSummary:"MD", description:"大型根魚にも対応する高剛性なヘビーデューティーベイトリール。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
+            { id:"rockfish_advanced_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"24セルテート", model:"LT4000-CXH", specSummary:"LT4000-CXH", description:"強い巻き取りと耐久性を重視した高剛性設計。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"rockfish_advanced_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"24ツインパワー", model:"4000XG", specSummary:"4000XG", description:"大型根魚にも対応する高剛性なヘビーデューティーベイトリール。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         line: { specification: "PE 1.5〜2号", description: "岩礁帯での根ズレに耐える強度", products: [] },
@@ -1246,8 +1247,8 @@ const fishingTypes = [
           specification: "6.6ft前後", power: "ML",
           description: "スピニングタックルで扱いやすく、バス釣りの基本を覚えやすい構成。",
           products: [
-            { id:"bass_beginner_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"バス X", model:"", specSummary:"6.6ft前後・ML", description:"スピニングタックルで扱いやすく、バス釣りの基本を覚えやすい構成。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
-            { id:"bass_beginner_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"バスワン XT+", model:"S66ML", specSummary:"6.6ft・ML", description:"扱いやすさと伸びやかな弾道が魅力のバス釣り入門モデル。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
+            { id:"bass_beginner_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"バス X", model:"662LS", specSummary:"6.6ft前後・ML", description:"スピニングタックルで扱いやすく、バス釣りの基本を覚えやすい構成。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"bass_beginner_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"バスワン XT+", model:"266L-S/2", specSummary:"6.6ft・L", description:"扱いやすさと伸びやかな弾道が魅力のバス釣り入門モデル。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         reel: {
@@ -1267,8 +1268,8 @@ const fishingTypes = [
           specification: "6.6〜7ft", power: "ML〜M",
           description: "ベイトタックルを中心に、幅広いルアーを扱えるバーサタイル構成。",
           products: [
-            { id:"bass_intermediate_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"タトゥーラ", model:"", specSummary:"6.6〜7ft・ML〜M", description:"ベイトタックルを中心に、幅広いルアーを扱えるバーサタイル構成。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
-            { id:"bass_intermediate_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"エクスプライド", model:"166ML", specSummary:"6.6ft・ML〜M", description:"性能と価格のバランスに優れた中級者向けバーサタイルモデル。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
+            { id:"bass_intermediate_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"タトゥーラ XT", model:"681MLFS", specSummary:"6.6〜7ft・ML〜M", description:"ベイトタックルを中心に、幅広いルアーを扱えるバーサタイル構成。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"bass_intermediate_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"エクスプライド", model:"166M", specSummary:"6.6ft・M", description:"性能と価格のバランスに優れた中級者向けバーサタイルモデル。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         reel: {
@@ -1276,7 +1277,7 @@ const fishingTypes = [
           description: "クランク等プラグ操作にも対応するオールラウンドリール",
           products: [
             { id:"bass_intermediate_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"タトゥーラ SV TW", model:"SV TW", specSummary:"SV TW", description:"クランク等プラグ操作にも対応するオールラウンドリール。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
-            { id:"bass_intermediate_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"バスワン XT", model:"", specSummary:"バスワンXT", description:"扱いやすさが魅力のエントリーからのステップアップ向けベイトリール。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
+            { id:"bass_intermediate_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"バスワン XT", model:"150", specSummary:"150", description:"扱いやすさが魅力のエントリーからのステップアップ向けベイトリール。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         line: { specification: "フロロ 8〜12lb", description: "使うルアーに応じて選択", products: [] },
@@ -1288,16 +1289,16 @@ const fishingTypes = [
           specification: "用途別専用モデル", power: "",
           description: "軽量性・感度・キャスト性能を重視し、釣り方ごとにタックルを細分化する本格派向け。",
           products: [
-            { id:"bass_advanced_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"スティーズ（ベイトキャスティングモデル）", model:"", specSummary:"用途別専用モデル", description:"軽量性・感度・キャスト性能を重視し、釣り方ごとにタックルを細分化する本格派向け。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
-            { id:"bass_advanced_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"ポイズンアドレナ", model:"", specSummary:"用途別専用モデル", description:"軽量性・感度・キャスト性能を追求したハイエンドクラス。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
+            { id:"bass_advanced_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"スティーズ", model:"C66M（マシンガンキャストタイプ1.5）", specSummary:"用途別専用モデル", description:"軽量性・感度・キャスト性能を重視し、釣り方ごとにタックルを細分化する本格派向け。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"bass_advanced_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"ポイズンアドレナ", model:"1610M-2", specSummary:"用途別専用モデル", description:"軽量性・感度・キャスト性能を追求したハイエンドクラス。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         reel: {
           specification: "ハイエンドベイトリール",
           description: "軽量性・剛性・巻き心地を追求したフラッグシップリール",
           products: [
-            { id:"bass_advanced_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"スティーズ SV TW", model:"SV TW", specSummary:"SV TW", description:"軽量性・剛性・巻き心地を追求したフラッグシップリール。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
-            { id:"bass_advanced_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"アンタレス DC", model:"", specSummary:"アンタレスDC", description:"軽量性・剛性・巻き心地を追求したフラッグシップベイトリール。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
+            { id:"bass_advanced_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"24スティーズ SV TW", model:"100", specSummary:"100", description:"軽量性・剛性・巻き心地を追求したフラッグシップリール。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"bass_advanced_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"23アンタレスDC", model:"MD XG", specSummary:"MD XG", description:"軽量性・剛性・巻き心地を追求したフラッグシップベイトリール。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         line: { specification: "フロロ 8〜16lb", description: "用途に応じた専用ルアーに合わせて選択", products: [] },
@@ -1324,13 +1325,16 @@ const fishingTypes = [
           description: "持ち運びやすく、サビキ釣りをはじめ堤防釣り全般に使いやすい万能ロッド。",
           products: [
             { id:"sabiki_beginner_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"リバティクラブ 小継磯 2-330", model:"2-330", specSummary:"2-330(小継磯竿)", description:"持ち運びやすく、サビキ釣りをはじめ堤防釣り全般に使いやすい万能ロッド。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
-            { id:"sabiki_beginner_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"ホリデー磯", model:"1.5-330", specSummary:"1.5号・3.3m", description:"低価格で軽くて丈夫な、堤防釣り全般に使える定番モデル。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
+            { id:"sabiki_beginner_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"ホリデー磯", model:"2-300", specSummary:"1.5号・3.3m", description:"低価格で軽くて丈夫な、堤防釣り全般に使える定番モデル。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
         reel: {
           specification: "2500〜3000番クラス",
-          description: "エサ釣りで扱いやすく、番手さえ合っていれば特定の商品にこだわる必要は少ないため、特定商品はおすすめしていません。",
-          products: []
+          description: "エサ釣りで扱いやすく、コスパに優れたスピニングリールが中心。",
+          products: [
+            { id:"sabiki_beginner_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"レブロス", model:"LT3000-CXH", specSummary:"LT3000-CXH", description:"扱いやすく価格も手頃な入門向けスピニングリール。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"sabiki_beginner_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"サハラ", model:"C3000HG", specSummary:"C3000HG", description:"コストパフォーマンスに優れた入門定番リール。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
+          ]
         },
         line: { specification: "ナイロン 2〜3号", description: "扱いやすく初心者向けの太さ", products: [] },
         leader: { specification: "基本不要", description: "サビキ仕掛けに内蔵されているため通常は不要", products: [] },
@@ -1345,7 +1349,10 @@ const fishingTypes = [
             { id:"sabiki_intermediate_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"ホリデー磯", model:"2-450", specSummary:"2号・4.5m", description:"サビキだけでなくウキ釣りなどにも対応できる汎用モデル。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
-        reel: { specification: "3000番クラス", description: "遠投性能を重視したサイズ。エサ釣りでは番手さえ合っていれば特定の商品にこだわる必要は少ないため、特定商品はおすすめしていません。", products: [] },
+        reel: { specification: "3000番クラス", description: "遠投性能を重視したサイズ。", products: [
+            { id:"sabiki_intermediate_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"レガリス", model:"LT3000-CXH", specSummary:"LT3000-CXH", description:"軽量性と剛性を両立した中級定番スピニングリール。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"sabiki_intermediate_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"ナスキー", model:"C3000HG", specSummary:"C3000HG", description:"高い剛性と滑らかな巻き心地を両立した中級モデル。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
+          ] },
         line: { specification: "ナイロン 3号", description: "強度と扱いやすさのバランス", products: [] },
         leader: { specification: "基本不要", description: "サビキ仕掛けに内蔵されているため通常は不要", products: [] },
         lure: { specification: "サビキ仕掛け・ウキ仕掛け", description: "回遊状況に応じて棚を調整", products: [] }
@@ -1356,10 +1363,13 @@ const fishingTypes = [
           description: "サビキだけでなく、ウキ釣りなど堤防・磯の餌釣りまで幅広く楽しみたい人向け。",
           products: [
             { id:"sabiki_advanced_rod_1", category:"rod", maker:"DAIWA", brand:"ダイワ", name:"波濤 1.5-45・N", model:"1.5-45・N", specSummary:"1.5号・4.5m", description:"サビキだけでなく、ウキ釣りなど堤防・磯の餌釣りまで幅広く楽しみたい人向け。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
-            { id:"sabiki_advanced_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"磯 遠投 AX", model:"1.5-450", specSummary:"1.5号・4.5m", description:"遠投性能を高め、堤防・磯の餌釣りを幅広く楽しみたい人向け。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
+            { id:"sabiki_advanced_rod_2", category:"rod", maker:"SHIMANO", brand:"シマノ", name:"ボーダレス BB", model:"460M-T", specSummary:"1.5号・4.5m", description:"遠投性能を高め、堤防・磯の餌釣りを幅広く楽しみたい人向け。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
           ]
         },
-        reel: { specification: "3000番クラス", description: "遠投・巻き取りのバランスを重視したサイズ。エサ釣りでは番手さえ合っていれば特定の商品にこだわる必要は少ないため、特定商品はおすすめしていません。", products: [] },
+        reel: { specification: "3000番クラス", description: "遠投・巻き取りのバランスを重視したサイズ。", products: [
+            { id:"sabiki_advanced_reel_1", category:"reel", maker:"DAIWA", brand:"ダイワ", name:"25カルディア", model:"LT3000-XH", specSummary:"LT3000-XH", description:"軽量性・剛性・巻き心地のバランスに優れた上級定番スピニングリール。", image:"", recommendationRank:1, isActive:true, rakutenUrl:"", amazonUrl:"" },
+            { id:"sabiki_advanced_reel_2", category:"reel", maker:"SHIMANO", brand:"シマノ", name:"ヴァンフォード", model:"C3000XG", specSummary:"C3000XG", description:"軽量・高剛性ボディで感度と耐久性を両立した上級モデル。", image:"", recommendationRank:2, isActive:true, rakutenUrl:"", amazonUrl:"" }
+          ] },
         line: { specification: "ナイロン 2〜3号", description: "仕掛けや対象魚に応じて号数を選択", products: [] },
         leader: { specification: "基本不要", description: "サビキ仕掛けに内蔵されているため通常は不要", products: [] },
         lure: { specification: "サビキ・ウキ仕掛けなど", description: "堤防・磯で幅広い仕掛けを使い分け", products: [] }
@@ -1518,6 +1528,25 @@ function getRecommendedProducts(type, level, category){
   return (tackle && tackle.products) || [];
 }
 
+/* =====================================================================
+   楽天商品情報（rakuten_products.json）
+   -----------------------------------------------------------------
+   scripts/fetch-rakuten.js をローカルPCで実行し、楽天APIキーを一切
+   ブラウザに渡さずに取得した楽天の正式な商品情報（商品名・画像・価格・
+   アフィリエイトURL）を rakuten_products.json に保存している。
+   ここではそれを起動時に1回だけ読み込み、Product.id をキーに
+   renderProducts() で照合する。取得できていない商品は自動的に
+   既存の name / image / rakutenUrl のフォールバック表示になる。
+   ===================================================================== */
+let rakutenData = {};
+fetch('./rakuten_products.json')
+  .then(res => res.ok ? res.json() : {})
+  .then(data => {
+    rakutenData = data || {};
+    if (detail.classList.contains('is-open')) renderSpecGrid();
+  })
+  .catch(() => { /* 未取得・読み込み失敗時は既存データのみで表示を継続 */ });
+
 /* おすすめ商品（products）の描画。
    products が空配列/未設定の場合は何も表示しない（現状は常にこのケース）。
    将来、products に商品オブジェクトが入れば自動的にカードが表示される。
@@ -1532,17 +1561,26 @@ function renderProducts(products){
     <div class="product-list">
       <span class="product-list-label">おすすめ商品</span>
       ${items.map(p => {
+        const r = rakutenData[p.id];
+        const displayName = (r && r.rakutenProductName) || p.name;
+        const displayImage = (r && r.rakutenImageUrl) || p.image;
+        const rakutenLink = (r && r.rakutenAffiliateUrl) || p.rakutenUrl;
+        const priceTag = (r && typeof r.rakutenPrice === 'number')
+          ? `<span class="product-price">¥${r.rakutenPrice.toLocaleString()}</span>` : '';
+        const stockNote = (!r && !rakutenLink) ? `<span class="product-stock-note">※楽天に在庫なし</span>` : '';
         const links = [
-          p.rakutenUrl ? `<a class="product-link product-link-rakuten" href="${p.rakutenUrl}" target="_blank" rel="noopener sponsored">楽天で見る</a>` : '',
+          rakutenLink ? `<a class="product-link product-link-rakuten" href="${rakutenLink}" target="_blank" rel="noopener sponsored">楽天で見る</a>` : '',
           p.amazonUrl ? `<a class="product-link product-link-amazon" href="${p.amazonUrl}" target="_blank" rel="noopener sponsored">Amazonで見る</a>` : ''
         ].join('');
         return `
           <div class="product-item">
             <div class="product-item-main">
-              ${p.image ? `<img src="${p.image}" alt="${p.name}" class="product-thumb" loading="lazy">` : `<div class="product-thumb product-thumb-empty"></div>`}
+              ${displayImage ? `<img src="${displayImage}" alt="${displayName}" class="product-thumb" loading="lazy">` : `<div class="product-thumb product-thumb-empty"></div>`}
               <div class="product-info">
                 ${p.maker ? `<span class="product-maker" data-maker="${p.maker}">${p.maker}</span>` : ''}
-                <span class="product-name">${p.name}</span>
+                <span class="product-name">${displayName}</span>
+                ${priceTag}
+                ${stockNote}
                 ${p.brand ? `<span class="product-brand">${p.brand}</span>` : ''}
               </div>
             </div>

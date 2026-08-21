@@ -332,24 +332,6 @@
   }
   @media(min-width:640px){ .detail-desc{max-width:30em;} }
 
-  /* tackle illustration (per-fishing-type overview image, shown before level select) */
-  .tackle-illust{
-    background:var(--paper); border:1px solid var(--hair); border-radius:var(--radius-lg);
-    padding:20px; margin-bottom:22px; text-align:center;
-  }
-  .tackle-illust .eyebrow-sm{
-    display:block; margin-bottom:14px;
-    font-family:'Roboto Mono', monospace; font-size:11px; letter-spacing:.12em;
-    text-transform:uppercase; color:var(--blue); font-weight:700;
-  }
-  .tackle-illust img{
-    max-width:380px; width:100%; height:auto; border-radius:var(--radius-md);
-    display:block; margin:0 auto;
-  }
-  .tackle-illust-note{
-    margin:14px 0 0; font-size:11.5px; color:var(--mist); line-height:1.6;
-  }
-
   /* level switch */
   .level-switch{
     display:flex; background:var(--sky); border-radius:999px; padding:5px; gap:4px; margin-bottom:22px;
@@ -565,12 +547,6 @@
         <p class="detail-desc" id="detailDesc"></p>
       </div>
 
-      <div class="tackle-illust" id="tackleIllust" style="display:none;">
-        <span class="eyebrow-sm">タックル構成イメージ</span>
-        <img id="tackleIllustImg" src="" alt="">
-        <p class="tackle-illust-note">※イラストは代表的なタックル構成例です。レベルによって推奨スペックが異なります。</p>
-      </div>
-
       <div class="section-head" style="margin-bottom:12px;">
         <span class="eyebrow-sm">Step 2 — Level</span>
         <h2 style="font-size:17px;">レベルを選択</h2>
@@ -627,7 +603,6 @@ const fishingTypes = [
     targetFish: "アオリイカ",
     shortDesc: "エギ（餌木）を操作してアオリイカを狙うライトなルアーフィッシング。",
     icon: "squid",
-    tackleIllustration: { image: "イラスト画像/タックルイラスト/エギング.jpg", alt: "エギングのタックル構成イラスト" },
     levels: {
       beginner: {
         rod: {
@@ -1790,8 +1765,6 @@ const detailIcon = document.getElementById('detailIcon');
 const detailName = document.getElementById('detailName');
 const detailFish = document.getElementById('detailFish');
 const detailDesc = document.getElementById('detailDesc');
-const tackleIllust    = document.getElementById('tackleIllust');
-const tackleIllustImg = document.getElementById('tackleIllustImg');
 const levelSwitch= document.getElementById('levelSwitch');
 const specGrid   = document.getElementById('specGrid');
 const tipText    = document.getElementById('tipText');
@@ -1920,15 +1893,6 @@ function openDetail(id){
   detailName.textContent = type.name;
   detailFish.textContent = `対象魚：${type.targetFish}`;
   detailDesc.textContent = type.shortDesc;
-
-  if (type.tackleIllustration) {
-    tackleIllustImg.src = type.tackleIllustration.image;
-    tackleIllustImg.alt = type.tackleIllustration.alt || `${type.name}のタックル構成イラスト`;
-    tackleIllust.style.display = '';
-  } else {
-    tackleIllustImg.src = '';
-    tackleIllust.style.display = 'none';
-  }
 
   levelSwitch.innerHTML = levelMeta.map(l => `
     <button data-level="${l.key}" class="${l.key === currentLevel ? 'is-active' : ''}">${l.label}</button>

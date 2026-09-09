@@ -1,2 +1,7 @@
 .env
 node_modules/
+rakuten_check_results.csv
+rakuten_check_task.log
+
+# Local affiliate backup
+/archive/
